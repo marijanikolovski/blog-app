@@ -17,12 +17,19 @@ export const AddPost = () => {
     history.push("/posts");
   };
 
+  const handelResetForm = () => 
+    setNewPost ({
+    title: '',
+    text: ''
+  })
+
   return (
     <div>
       <AddPostComponent
         newPost={newPost}
         setNewPost={setNewPost}
         onSubmit={hendleAddPost}
+        onReset={handelResetForm}
       />
     </div>
   );

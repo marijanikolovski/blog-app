@@ -1,6 +1,11 @@
 import React from "react";
 
-export const AddPostComponent = ({ newPost, setNewPost, onSubmit }) => {
+export const AddPostComponent = ({ 
+    newPost, 
+    setNewPost, 
+    onSubmit,
+    onReset
+ }) => {
   return (
     <div>
       <h1>Create New Post</h1>
@@ -26,6 +31,12 @@ export const AddPostComponent = ({ newPost, setNewPost, onSubmit }) => {
           }
         />
         <button type="submit">Add New Post</button>
+        <button 
+            type="submit"
+            onClick={onReset}
+        >
+            Reset
+        </button>
       </form>
     </div>
   );
