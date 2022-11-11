@@ -31,6 +31,16 @@ class PostService {
     }
     return [];
   }
+
+  async edit(id, newPost) {
+    try {
+      const { data } = await axiosInstance.put(`posts/${id}`, newPost);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+    return null;
+  }
 }
 
 export default new PostService();

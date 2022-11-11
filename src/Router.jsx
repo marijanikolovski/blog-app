@@ -17,6 +17,9 @@ export const Router = () => {
         <Route path="/add">
           <AddPost />
         </Route>
+        <Route path="/edit/:id">
+          <AddPost />
+        </Route>
         <Route path="/">
           <AppPosts />
         </Route>

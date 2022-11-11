@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import PostService from '../services/PostService'
 
 export const AppPosts = () => {
+  const history = useHistory()
   const [posts, setPosts] = useState([]);
 
   const handelGetPost = async () => {
@@ -21,6 +22,7 @@ export const AppPosts = () => {
         <div key={post.id}>
           <h3>{post.title}</h3>
           <Link to={`/post/${post.id}`}>View Post</Link>
+          <button onClick={() => history.push(`/edit/${post.id}`)}>Edit</button>
         </div>
       ))}
     </div>

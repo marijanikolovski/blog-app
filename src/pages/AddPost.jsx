@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { AddPostComponent } from "../components/AddPostComponent";
 import PostService from "../services/PostService";
@@ -11,9 +11,15 @@ export const AddPost = () => {
     text: "",
   });
 
-  const hendleAddPost = async (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    await PostService.add(newPost);
+    const data = null;
+
+    if (id) {
+      await PostService.edit(id, newPost);
+    } else {
+      await PostService.add(newPost);
+    }
     history.push("/posts");
   };
 
@@ -23,12 +29,24 @@ export const AddPost = () => {
       text: "",
     });
 
+  const handleEditPost = async () => {
+    const data = await PostService.get(id);
+    setNewPost(data);
+  };
+
+  useEffect(() => {
+    if (id) {
+      handleEditPost();
+    }
+  }, [id]);
+
   return (
     <div>
       <AddPostComponent
+        id={id}
         newPost={newPost}
         setNewPost={setNewPost}
-        onSubmit={hendleAddPost}
+        onSubmit={handleOnSubmit}
         onReset={handelResetForm}
       />
     </div>
