@@ -4,7 +4,7 @@ import { axiosInstance } from "./AxiosService";
 class PostService {
   async getAll() {
     try {
-      const { data } = await axiosInstance.get("/posts");
+      const { data } = await axiosInstance.get('posts?filter={"include":["comments"]}');
       return data;
     } catch (error) {
       console.log(error);
@@ -14,7 +14,7 @@ class PostService {
 
   async get(id) {
     try {
-      const { data } = await axiosInstance.get(`posts/${id}`);
+      const { data } = await axiosInstance.get(`posts/${id}?filter={"include":["comments"]}`);
       return data;
     } catch (error) {
       console.log(error);
@@ -50,6 +50,16 @@ class PostService {
       console.log(error)
     }
     return null
+  }
+
+  async addComment(comment, postId) {
+    try {
+      const { data } = await axiosInstance.post(`posts/${postId}/comments`, comment);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+    return null;
   }
 }
 

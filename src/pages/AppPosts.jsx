@@ -28,6 +28,13 @@ export const AppPosts = () => {
       {posts.map((post) => (
         <div key={post.id}>
           <h3>{post.title}</h3>
+          <div>
+            {post.comments && post.comments.length ? (
+              <span>Number of comments: {post.comments.length}</span>
+            ) : (
+              <span>No comments</span>
+            )}
+          </div>
           <Link to={`/post/${post.id}`}>View Post</Link>
           <button type='submit' onClick={() => history.push(`/edit/${post.id}`)}>Edit</button>
           <button type='submit' onClick={() => hendleDeletePost(post.id)}>Delete</button>

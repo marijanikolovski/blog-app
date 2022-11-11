@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import PostService from '../services/PostService';
 import { SinglePostComponent } from '../components/SinglePostComponent'
+import { AddComment } from './AddComment';
 
 export const SinglePost = () => {
     const { id } = useParams();
@@ -16,12 +17,21 @@ export const SinglePost = () => {
         handleGetId();
     }, [id])
 
+    const handleAddComment = (comment) => {
+        setPost({ ...post, comments: [...post.comments, comment] });
+    };
+
     return (
         <div>
             <SinglePostComponent
                 key={post.id}
+                post={post}
                 title={post.title}
                 text={post.text}
+            />
+            <AddComment
+                postId={post.id}
+                addCommentFunction={handleAddComment}
             />
         </div>
     )
