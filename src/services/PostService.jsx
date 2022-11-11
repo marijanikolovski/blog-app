@@ -11,6 +11,16 @@ class PostService {
         }
         return [];
     }
+
+    async get(id) {
+        try {
+            const { data } = await axiosInstance.get(`posts/${id}`);
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+        return null;
+    }
 }
 
 export default new PostService();

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
 import PostService from '../services/PostService'
 
 export const AppPosts = () => {
@@ -17,7 +18,10 @@ export const AppPosts = () => {
     <div>
       <h1>Posts:</h1>
       {posts.map((post) => (
-        <h3 key={post.id}>{post.title}</h3>
+        <div key={post.id}>
+          <h3>{post.title}</h3>
+          <Link to={`/post/${post.id}`}>View Post</Link>
+        </div>
       ))}
     </div>
   )
