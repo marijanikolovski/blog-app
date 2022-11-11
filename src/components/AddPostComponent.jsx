@@ -13,6 +13,7 @@ export const AddPostComponent = ({
         <label>Input title</label>
         <input
           required
+          minLength={2}
           type="text"
           placeholder="Title"
           value={newPost.title}
@@ -24,6 +25,7 @@ export const AddPostComponent = ({
         <textarea
           required
           type="text"
+          maxLength={300}
           placeholder="Text"
           value={newPost.text}
           onChange={({ target }) =>
