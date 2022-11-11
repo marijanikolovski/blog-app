@@ -15,6 +15,13 @@ export const AppPosts = () => {
     handelGetPost()
   }, [])
 
+  const hendleDeletePost = async (id) => {
+    await PostService.delete(id);
+
+    const data = await PostService.getAll();
+    setPosts(data);
+  }
+
   return (
     <div>
       <h1>Posts:</h1>
@@ -22,7 +29,8 @@ export const AppPosts = () => {
         <div key={post.id}>
           <h3>{post.title}</h3>
           <Link to={`/post/${post.id}`}>View Post</Link>
-          <button onClick={() => history.push(`/edit/${post.id}`)}>Edit</button>
+          <button type='submit' onClick={() => history.push(`/edit/${post.id}`)}>Edit</button>
+          <button type='submit' onClick={() => hendleDeletePost(post.id)}>Delete</button>
         </div>
       ))}
     </div>
