@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import PostService from '../services/PostService';
 import { SinglePostComponent } from '../components/SinglePostComponent'
 import { AddComment } from './AddComment';
+import useFormattedDate from '../hooks/useFormattedDate';
 
 export const SinglePost = () => {
     const { id } = useParams();
     const [post, setPost] = useState({})
+    const formattedDate = useFormattedDate(post.createdAt);
 
     const handleGetId = async () => {
         const post = await PostService.get(id)
@@ -28,6 +30,7 @@ export const SinglePost = () => {
                 post={post}
                 title={post.title}
                 text={post.text}
+                formattedDate={formattedDate}
             />
             <AddComment
                 postId={post.id}
