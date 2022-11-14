@@ -24,10 +24,9 @@ export const SinglePost = () => {
     };
 
     const hendleDeleteComment = async (comentId) => {
-        await PostService.deleteComment(comentId);
-    
-        const data = await PostService.get(id);
-        setPost(data);
+        const data = await PostService.deleteComment(comentId);
+
+        setPost({...post, comments: [...post.comments.filter((comment) => comment.id !== comentId)]})
       }
 
     return (
