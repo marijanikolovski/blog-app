@@ -4,7 +4,8 @@ export const SinglePostComponent = ({
     title, 
     text, 
     post,
-    formattedDate
+    formattedDate,
+    onDeleteComment
  }) => {
     return (
         <div>
@@ -15,7 +16,10 @@ export const SinglePostComponent = ({
             {post.comments && post.comments.length ? (
                 <ul>
                     {post.comments.map((comment) => (
-                        <li key={comment.id}>{comment.text}</li>
+                        <li key={comment.id}>
+                            {comment.text} 
+                            <button onClick={() => onDeleteComment(comment.id)}>Remowe</button>
+                        </li>
                     ))}
                 </ul>
             ) : (

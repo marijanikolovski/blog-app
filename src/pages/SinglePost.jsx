@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import PostService from '../services/PostService';
 import { SinglePostComponent } from '../components/SinglePostComponent'
 import { AddComment } from './AddComment';
@@ -23,6 +23,13 @@ export const SinglePost = () => {
         setPost({ ...post, comments: [...post.comments, comment] });
     };
 
+    const hendleDeleteComment = async (comentId) => {
+        await PostService.deleteComment(comentId);
+    
+        const data = await PostService.get(id);
+        setPost(data);
+      }
+
     return (
         <div>
             <SinglePostComponent
@@ -31,6 +38,7 @@ export const SinglePost = () => {
                 title={post.title}
                 text={post.text}
                 formattedDate={formattedDate}
+                onDeleteComment={hendleDeleteComment}
             />
             <AddComment
                 postId={post.id}

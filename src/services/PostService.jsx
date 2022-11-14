@@ -61,6 +61,16 @@ class PostService {
     }
     return null;
   }
+
+  async deleteComment(id) {
+    try {
+      const { data } = await axiosInstance.delete(`comments/${id}`)
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+    return null
+  }
 }
 
 export default new PostService();
