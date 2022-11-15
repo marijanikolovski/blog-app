@@ -39,6 +39,14 @@ export const SinglePost = () => {
         setCommentId(comentId)
     }
 
+    const hendelOnClickComment = async (funId) => {
+        const respons = await PostService.getComment(funId);
+        alert(`
+            text: ${respons.text},
+            createdAt: ${respons.createdAt}
+        `);
+    }
+
     return (
         <div>
             <SinglePostComponent
@@ -49,6 +57,7 @@ export const SinglePost = () => {
                 formattedDate={formattedDate}
                 onDeleteComment={hendleDeleteComment}
                 getCommnetId={hendelGetCommentId}
+                onClickComment={hendelOnClickComment}
             />
             <AddComment
                 postId={post.id}
