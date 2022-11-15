@@ -8,6 +8,7 @@ export const SinglePostComponent = ({
     onDeleteComment,
     getCommnetId,
     onClickComment,
+    onDeleteAllComments
  }) => {
     return (
         <div>
@@ -15,6 +16,7 @@ export const SinglePostComponent = ({
             <p>{ text }</p>
             <p>Created at: {formattedDate}</p>
             <h4>Coments:</h4>
+            <button type='submit' onClick={() => onDeleteAllComments(post.id, post.comments)}>Delete all comments</button>
             {post.comments && post.comments.length ? (
                 <div>
                 <h2>Comments:</h2>

@@ -93,6 +93,15 @@ class PostService {
     return null;
 }
 
+async deleteAllComment(postId, comments) {
+  try {
+    const { data } = await axiosInstance.delete(`posts/${postId}/comments`, comments)
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+  return null
+}
 
 }
 

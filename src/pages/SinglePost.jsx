@@ -47,6 +47,12 @@ export const SinglePost = () => {
         `);
     }
 
+    const handleDeleteAllComments = async(postId, comments) => {
+        await PostService.deleteAllComment(postId, comments);       
+        const data = await PostService.get(id);
+        setPost(data);
+    }
+    
     return (
         <div>
             <SinglePostComponent
@@ -58,6 +64,7 @@ export const SinglePost = () => {
                 onDeleteComment={hendleDeleteComment}
                 getCommnetId={hendelGetCommentId}
                 onClickComment={hendelOnClickComment}
+                onDeleteAllComments={handleDeleteAllComments}
             />
             <AddComment
                 postId={post.id}
