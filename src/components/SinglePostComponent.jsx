@@ -5,7 +5,8 @@ export const SinglePostComponent = ({
     text, 
     post,
     formattedDate,
-    onDeleteComment
+    onDeleteComment,
+    getCommnetId,
  }) => {
     return (
         <div>
@@ -14,14 +15,18 @@ export const SinglePostComponent = ({
             <p>Created at: {formattedDate}</p>
             <h4>Coments:</h4>
             {post.comments && post.comments.length ? (
-                <ul>
+                <div>
+                <h2>Comments:</h2>
+                <div>
                     {post.comments.map((comment) => (
-                        <li key={comment.id}>
-                            {comment.text} 
+                        < div key={comment.id} >
+                            <p >{comment.text}</p>
                             <button onClick={() => onDeleteComment(comment.id)}>Remowe</button>
-                        </li>
+                            <button onClick={() => getCommnetId(comment.id)}>Edit</button>
+                        </div>
                     ))}
-                </ul>
+                </div>
+            </div>
             ) : (
                 <p>No comments</p>
             )}
@@ -29,3 +34,6 @@ export const SinglePostComponent = ({
         </div>
     )
 }
+
+
+

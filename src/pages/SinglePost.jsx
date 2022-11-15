@@ -8,6 +8,10 @@ import useFormattedDate from '../hooks/useFormattedDate';
 export const SinglePost = () => {
     const { id } = useParams();
     const [post, setPost] = useState({})
+    const [commentForEdit, setcommentForEdit] = useState({
+        text: "",
+    });
+    const [commentId, setCommentId] = useState(0)
     const formattedDate = useFormattedDate(post.createdAt);
 
     const handleGetId = async () => {
@@ -26,8 +30,14 @@ export const SinglePost = () => {
     const hendleDeleteComment = async (comentId) => {
         const data = await PostService.deleteComment(comentId);
 
-        setPost({...post, comments: [...post.comments.filter((comment) => comment.id !== comentId)]})
-      }
+        setPost({...post, comments: post.comments.filter((comment) => comment.id !== comentId)})
+    }
+
+    const hendelGetCommentId = async (comentId) => {
+        const data = await PostService.getComment(comentId);
+        setcommentForEdit(data)
+        setCommentId(comentId)
+    }
 
     return (
         <div>
@@ -38,10 +48,14 @@ export const SinglePost = () => {
                 text={post.text}
                 formattedDate={formattedDate}
                 onDeleteComment={hendleDeleteComment}
+                getCommnetId={hendelGetCommentId}
             />
             <AddComment
                 postId={post.id}
                 addCommentFunction={handleAddComment}
+                commentId={commentId}
+                setcommentForEdit={setcommentForEdit}
+                commentForEdit={commentForEdit}
             />
         </div>
     )

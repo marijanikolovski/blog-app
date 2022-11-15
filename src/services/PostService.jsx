@@ -71,6 +71,29 @@ class PostService {
     }
     return null
   }
+
+  async getComment(id) {
+    try {
+      const { data } = await axiosInstance.get(`comments/${id}`)
+      return data
+    } catch (error) {
+      console.log(error);
+    }
+    return null;
+  }
+
+  async editComment(id, comment) {
+    try {
+        const { data } = await axiosInstance.put(`comments/${id}`, comment);
+        return data;
+
+    } catch (error) {
+        console.log(error);
+    }
+    return null;
+}
+
+
 }
 
 export default new PostService();
